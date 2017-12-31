@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const NinjaModel = require('../models/ninja.js')
 
 router.get('/ninjas', function(req, res) {
     res.send({type: 'GET'});
 });
 
 router.post('/ninjas', function(req, res) {
-    console.log(req.body);
-    res.send({
-        type: 'POST',
-        name: req.body.name,
-        rank: req.body.rank
+    NinjaModel.create(req.body).then(function(ninja) {
+        res.send(ninja);
     });
 });
 
