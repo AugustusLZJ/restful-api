@@ -17,8 +17,11 @@ router.put('/ninjas/:id', function(req, res, next) {
     res.send({type: 'PUT'});
 });
 
-router.delete('/ninjas/:id', function(req, res) {
-    res.send({type: 'DELETE'});
+router.delete('/ninjas/:id', function(req, res, next) {
+    // console.log(req.params.id);
+    NinjaModel.findByIdAndRemove({_id: req.params.id}).then(function(ninja) {
+        res.send(ninja);
+    }).catch(next);
 });
 
 module.exports = router;
