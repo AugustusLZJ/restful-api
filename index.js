@@ -12,7 +12,10 @@ mongoose.Promise = global.Promise;
 // listen for request
 app.use(bodyParser.json())
    .use('/api', require('./routes/api.js'))
+   .use(function(err, req, res, next) {
+        console.log("ERROR:\n"+err);
+        res.status(422).send({error: err.message});
+    })
    .listen(process.env.port || 4000, function() {
         console.log('now listening for requests');  
     });
-
