@@ -14,7 +14,9 @@ router.post('/ninjas', function(req, res, next) {
 });
 
 router.put('/ninjas/:id', function(req, res, next) {
-    res.send({type: 'PUT'});
+    NinjaModel.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then(function(ninja) {
+        res.send(ninja);
+    });
 });
 
 router.delete('/ninjas/:id', function(req, res, next) {
