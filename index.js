@@ -9,6 +9,8 @@ const app = express();
 mongoose.connect('mongodb://localhost/ninjago');
 mongoose.Promise = global.Promise;
 
+app.use(express.static('public'));
+
 // listen for request
 app.use(bodyParser.json())
    .use('/api', require('./routes/api.js'))
